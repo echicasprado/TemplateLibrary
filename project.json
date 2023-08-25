@@ -44,7 +44,7 @@
     "fileInfoCollection": [
       {
         "templateType": "Generic",
-        "fileName": ".templates\\TemplateWithLoggin.xaml"
+        "fileName": ".templates\\SimpleTemplate.xaml"
       }
     ],
     "modernBehavior": true

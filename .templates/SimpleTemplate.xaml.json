@@ -1,0 +1,33 @@
+{
+  "DisplayName": "SimpleTemplate",
+  "Tooltip": "",
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "in_XamlNameThatInvokes",
+      "DisplayName": "in_XamlNameThatInvokes",
+      "Category": null,
+      "Tooltip": "Xaml name invoke it",
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "in_ShowLogs",
+      "DisplayName": "in_ShowLogs",
+      "Category": null,
+      "Tooltip": "Boolean value, use to show init process log and end process log",
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}
