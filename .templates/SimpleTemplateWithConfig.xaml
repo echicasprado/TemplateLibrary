@@ -1,18 +1,19 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Template" this:Template.in_ShowLogs="True" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SimpleTemplateWithConfig" this:SimpleTemplateWithConfig.in_ShowLogs="True" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Xaml name invoke it" Name="in_XamlNameThatInvokes" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Boolean value, use to show init process log and end process log" Name="in_ShowLogs" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
-  <this:Template.in_XamlNameThatInvokes>
+  <this:SimpleTemplateWithConfig.in_XamlNameThatInvokes>
     <InArgument x:TypeArguments="x:String">
       <Literal x:TypeArguments="x:String" Value="" />
     </InArgument>
-  </this:Template.in_XamlNameThatInvokes>
+  </this:SimpleTemplateWithConfig.in_XamlNameThatInvokes>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
   <sap2010:Annotation.AnnotationText>UPTF00000088eyI8SGVscExpbms+a19fQmFja2luZ0ZpZWxkIjpudWxsLCI8SW5pdGlhbFRvb2x0aXA+a19fQmFja2luZ0ZpZWxkIjoiIiwiPFZlcnNpb24+a19fQmFja2luZ0ZpZWxkIjoxfQ==</sap2010:Annotation.AnnotationText>
-  <sap:VirtualizedContainerService.HintSize>931,1446</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>931,2028</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -41,6 +42,7 @@
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -81,9 +83,14 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Private.Uri</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Simple template use 4 scope&#xA;- init scope&#xA;- global variables&#xA;- body scope&#xA;- end scope&#xA;&#xA;Init scope - get current xaml name and show login about, what xaml invoke it &#xA;- global variable - use to set init value in global variables&#xA;- body scope - add all activies to use xaml file &#xA;- end scope - show log about end process for current xaml file.&#xA;&#xA;arguments:&#xA;in_XamlNameThatInvokes: xaml name invoke it&#xA;in_ShowLogs: Value to show logs into init scope and end scope" DisplayName="Template Sequence" sap:VirtualizedContainerService.HintSize="558,1381" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Simple template use 4 scope&#xA;- init scope&#xA;- global variables&#xA;- body scope&#xA;- end scope&#xA;&#xA;Init scope - get current xaml name and show login about, what xaml invoke it &#xA;- global variable - use to set init value in global variables&#xA;- body scope - add all activies to use xaml file &#xA;- end scope - show log about end process for current xaml file.&#xA;&#xA;arguments:&#xA;in_XamlNameThatInvokes: xaml name invoke it&#xA;in_ShowLogs: Value to show logs into init scope and end scope" DisplayName="SimpleTemplateWithConfig Sequence" sap:VirtualizedContainerService.HintSize="610,1963" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="CurrentXamlName" />
     </Sequence.Variables>
@@ -93,7 +100,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Init Process" sap:VirtualizedContainerService.HintSize="496,480" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Init Process" sap:VirtualizedContainerService.HintSize="548,1062" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="ui:CurrentJobInfo" Name="CurrentJobInfo" />
       </Sequence.Variables>
@@ -103,8 +110,8 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:GetCurrentJobInfo DisplayName="Get Current Job Info" sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="GetCurrentJobInfo_1" Result="[CurrentJobInfo]" />
-      <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <ui:GetCurrentJobInfo DisplayName="Get Current Job Info" sap:VirtualizedContainerService.HintSize="486,25" sap2010:WorkflowViewState.IdRef="GetCurrentJobInfo_1" Result="[CurrentJobInfo]" />
+      <Assign sap:VirtualizedContainerService.HintSize="486,82" sap2010:WorkflowViewState.IdRef="Assign_1">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[CurrentXamlName]</OutArgument>
         </Assign.To>
@@ -112,7 +119,7 @@
           <InArgument x:TypeArguments="x:String">[CurrentJobInfo.WorkflowName]</InArgument>
         </Assign.Value>
       </Assign>
-      <If Condition="[in_ShowLogs]" DisplayName="Show log" sap:VirtualizedContainerService.HintSize="434,182" sap2010:WorkflowViewState.IdRef="If_1">
+      <If Condition="[in_ShowLogs]" DisplayName="Show log" sap:VirtualizedContainerService.HintSize="486,764" sap2010:WorkflowViewState.IdRef="If_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>

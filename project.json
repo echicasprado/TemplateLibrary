@@ -43,6 +43,10 @@
       {
         "templateType": "Generic",
         "fileName": ".templates\\SimpleTemplate.xaml"
+      },
+      {
+        "templateType": "Generic",
+        "fileName": ".templates\\SimpleTemplateWithConfig.xaml"
       }
     ],
     "modernBehavior": true
