@@ -1,5 +1,15 @@
 {
-  "Tags": [],
+  "Tags": [
+    {
+      "Key": "CustomTemplate"
+    },
+    {
+      "Key": "Library"
+    },
+    {
+      "Key": "Logging"
+    }
+  ],
   "SeparateRuntimeDependencies": true,
   "IncludeSources": true
 }
